@@ -1,0 +1,38 @@
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style>
+table, th, td {
+  padding: 10px ;
+   border: 1px black ;
+}
+
+</style>
+</head>
+<body>
+
+	<div>
+		<h1>Display Images</h1>
+		<table>
+			<tr>
+				<td th:each="example: ${example}" ><img alt="abc"  height="200px"
+					width="200px" th:src="@{${example.photosImagePath}}"></td>
+			</tr>
+		</table>
+	</div>
+
+	<div>
+		<h1>Display Video</h1>
+		<table>
+			<tr >
+				<td th:each="video: ${video}"><video width="320" height="240" controls>
+						<source th:src="@{${video.getVideoImagePath}}" type="video/mp4">
+					</video></td>
+			</tr>
+		</table>
+	</div>
+
+</body>
+</html>

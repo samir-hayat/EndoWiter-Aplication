@@ -1,0 +1,23 @@
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form th:action="@{/save/video}"
+    th:object="${UploadVideo}" method="post"
+    enctype="multipart/form-data"
+    >
+    ...
+    <div>
+     
+    <label>Video: </label>
+    <input type="file" name="file" accept="application/mp4 " />
+      <input type="submit" value="Submit">
+    </div> 
+    
+</form>
+</body>
+</html>>

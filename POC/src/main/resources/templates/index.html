@@ -1,0 +1,24 @@
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form th:action="@{/image/save}"
+    th:object="${Example}" method="post"
+    enctype="multipart/form-data"
+    >
+    ...
+    <div>
+     
+    <label>Photos: </label>
+    <input type="file" name="image" accept="application/mp4 " />
+      <input type="submit" value="Submit">
+    </div> 
+    
+</form>
+
+</body>
+</html>
