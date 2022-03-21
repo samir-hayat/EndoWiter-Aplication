@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,8 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class FileUploadUtil {
 	
-
-	   
 	      
 	 public static void saveFile(String uploadDir, String fileName,
 	            MultipartFile multipartFile) throws IOException {
@@ -36,7 +35,7 @@ public class FileUploadUtil {
 	 public static void savevideo(String uploadvideoDir, String videofile,
 	            MultipartFile file) throws IOException {
 	        Path uploadPath = Paths.get(uploadvideoDir);
-	         
+	          System.out.println(uploadPath.getParent());
 	        if (!Files.exists(uploadPath)) {
 	            Files.createDirectories(uploadPath);
 	        }

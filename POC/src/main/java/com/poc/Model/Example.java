@@ -1,6 +1,7 @@
 package com.poc.Model;
 
 import java.beans.Transient;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,6 +22,7 @@ public class Example {
 	@Column(nullable = true, length = 64)
     private String photos;
 	
+//	private List<String> filePath;
 
 	
 	 @Transient

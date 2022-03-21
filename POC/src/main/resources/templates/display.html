@@ -18,7 +18,11 @@ table, th, td {
 		<table>
 			<tr>
 				<td th:each="example: ${example}" ><img alt="abc"  height="200px"
-					width="200px" th:src="@{${example.photosImagePath}}"></td>
+					width="200px" th:src="@{${example.photosImagePath}}">
+					<a th:href="@{/delete/{id}/(id=${example.id})}">
+					<button type="button">Delete</button></a></td>
+					
+					
 			</tr>
 		</table>
 	</div>

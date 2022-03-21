@@ -1,11 +1,16 @@
 package com.poc.Controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -61,12 +66,15 @@ public ImageController(ExampleRepo exampleRepo, VideoRepo videorepo) {
 	@PostMapping("/image/save")
 	public RedirectView saveUser(Example example, @RequestParam("image") MultipartFile multipartFile)
 			throws IOException {
-
 		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-
 		example.setPhotos(fileName);
 		Example savedUser = exampleRepo.save(example);
 		String uploadDir = "./user-photos/" + savedUser.getId();
+	     String path=(uploadDir+fileName);
+		List<String> pathAndName= new ArrayList<>();
+		pathAndName.add(path);
+//		example.setFilePath(pathAndName);
+		System.out.println(pathAndName);
 		FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 		return new RedirectView("/display", true);
 	}
@@ -74,13 +82,20 @@ public ImageController(ExampleRepo exampleRepo, VideoRepo videorepo) {
 	@PostMapping("/save/video")
 	public RedirectView savevideo(UploadVideo video, @RequestParam("file") MultipartFile file)
 			throws IOException {
-
+  
 		String videofile = StringUtils.cleanPath(file.getOriginalFilename());
-
 		video.setVideos(videofile);
 		UploadVideo savedUser = videorepo.save(video);
 		String uploadvideoDir = "./user-video/" + savedUser.getId();
 		FileUploadUtil.savevideo(uploadvideoDir, videofile, file);
+		return new RedirectView("/display", true);
+	}
+	
+	
+	@GetMapping("/delete/{id}")
+	public RedirectView delete(@PathVariable long id) {
+		
+		exampleRepo.deleteById(id);
 		return new RedirectView("/display", true);
 	}
 	
