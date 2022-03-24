@@ -1,14 +1,11 @@
 package com.poc.Model;
 
 import java.beans.Transient;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import lombok.Data;
 
 @Entity
@@ -19,7 +16,7 @@ public class Example {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@Column(nullable = true, length = 64)
+	
     private String photos;
 	
 //	private List<String> filePath;
@@ -31,7 +28,7 @@ public class Example {
 	        	return null;
 	        } 
 	         
-	        return "/user-photos/" + id + "/" + photos;
+	        return "/user-photos/";
 	    }
 	
 	

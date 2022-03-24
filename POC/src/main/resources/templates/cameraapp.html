@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Bootstrap CSS -->
+    <!-- https://cdnjs.com/libraries/twitter-bootstrap/5.0.0-beta1 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" integrity="sha512-KVdV5HNnN1f6YOANbRuNxyCnqyPICKUmQusEkyeRg4X0p8K1xCdbHs32aA7pWo6WqMZk0wAzl29cItZh8oBPYQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cameraapp.css}">
+    <!-- Icons: https://getbootstrap.com/docs/5.0/extend/icons/ -->
+    
+    <!-- https://cdnjs.com/libraries/font-awesome -->
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <div class="container m-5">
+        <div class="row">
+          <label>Select Video Source (Camera)</label>
+          <select id="video-source"></select>
+        </div>
+        <div class="row">
+            <div class="col-md-6 cammera">
+                <div class="col-md-12 tabcontent" id="London" style="background-color: lavender;">  
+                    <video id="video" playsinline autoplay></video> 
+                    <div class="col-md-12 text-center" style="background-color: lavender; padding: 5px 0 5px 0;">
+                        <h4>    
+                            <button class="btn" id="btnCapture"><i class="fa fa-camera fa-2x" aria-hidden="true"></i></button>    
+                        </h4> 
+                    </div>         
+                </div>
+                <div class="col-md-12 tabcontent" id="Paris">  
+                    <div id="container mx-auto" style="background-color: lavender;padding: 5px 0 5px 0;">
+                        <video id="gum" class="mx-auto w-100 d-flex justify-content-center d-block" autoplay muted></video>
+                      <div class="text-center">
+                          <!-- <button class="btn btn-primary"><i class="fa fa-camera" aria-hidden="true"></i></button> -->
+                          <button class="btn mt-1"  id="record" disabled>Record</button>
+                          <button class="d-none" id="play" disabled ></button>
+                      </div>
+                      <div class="d-none">
+                          <h4 class="text-info">Video Stream Options</h4>
+                          <div class="form-check form-switch">
+                              <input class="form-check-input" type="checkbox" id="echoCancellation">
+                              <label class="form-check-label text-center" for="flexSwitchCheckDefault">Echo Cancellation</label>
+                          </div>
+                      </div>
+                      <div>
+                        <span id="errorMsg"></span>
+                      </div>
+                    </div>
+                </div> 
+                <button class="tablink" onclick="openCity('London', this, '')" id="defaultOpen"><i class="fa fa-camera fa-2x" aria-hidden="true"></i></button>
+                <button class="tablink"  id="start" onclick="openCity('Paris', this, '')"><i class="fa-solid fa-video fa-2x" aria-hidden="true"></i></button>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-12">
+           
+                    <canvas style="background-color:white;" height="350" width="400" id="canvas"></canvas> 
+                    <button class="btn btn-danger" type="button" id="btnclic">Save image</button>
+                </div>
+                <div class="col-md-8">
+                    <video id="recorded" class="mx-auto d-flex justify-content-center" style="background-color:white;" height="350" width="300" playsinline loop></video>
+                    <a href="#" class="btn btn-secondary" id="download" disabled>Download</a>
+                </div>
+            </div>  
+        </div>
+    </div>
+   
+    
+    
+
+
+    
+
+    <!-- <div class="container-fluid">
+      <div class="row port-page">
+          <div class="gallery_product col-lg-3 col-md-4 col-sm-4 col-xs-6 filter hdpe">
+              <img src="http://fakeimg.pl/365x365/" class="img-responsive center-block port-image">
+          </div>
+          <div class="gallery_product col-lg-3 col-md-4 col-sm-4 col-xs-6 filter sprinkle">
+              <img src="http://fakeimg.pl/365x365/" class="img-responsive center-block port-image">
+          </div>
+          <div class="gallery_product col-lg-3 col-md-4 col-sm-4 col-xs-6 filter hdpe">
+              <img src="http://fakeimg.pl/365x365/" class="img-responsive center-block port-image">
+          </div>
+          <div class="gallery_product col-lg-3 col-md-4 col-sm-4 col-xs-6 filter irrigation">
+              <img src="http://fakeimg.pl/365x365/" class="img-responsive center-block port-image">
+          </div>
+          <div class="gallery_product col-lg-3 col-md-4 col-sm-4 col-xs-6 filter spray">
+              <img src="http://fakeimg.pl/365x365/" class="img-responsive center-block port-image">
+          </div>
+          <div class="gallery_product col-lg-3 col-md-4 col-sm-4 col-xs-6 filter irrigation">
+              <img src="http://fakeimg.pl/365x365/" class="img-responsive center-block port-image">
+          </div>
+      </div>
+    </div>
+    <style>
+      .port-image {
+    width: 100%;
+}
+
+.gallery_product {
+    margin-bottom: 30px;
+
+}
+    </style> -->
+<!-- <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="content">
+        <h1 class="section-header">Video Gallery</h1>
+        <div class="section-header-underline"></div>
+        <div class="video-gallery">
+          <div class="gallery-item">
+            <img src="/images/header-bg.jpg" alt="">
+            <div class="gallery-item-caption">
+              <a class="vimeo-popup" href="https://www.youtube.com/embed/tgbNymZ7vqY"></a>
+            </div>
+          </div>
+          <div class="gallery-item ">
+            <img src="/images/hipaa_hitech.webp" alt="">
+            <div class="gallery-item-caption">
+              <a class="vimeo-popup" href="/images/hipaa_hitech.webp"></a>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="/images/ICD10.webp" alt="">
+            <div class="gallery-item-caption">
+              <a class="vimeo-popup" href="/images/ICD10.webp"></a>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="/images/oracle.webp" alt="">
+            <div class="gallery-item-caption">
+              <a class="vimeo-popup" href="/images/oracle.webp"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="content">
+        <h1 class="section-header">Image Gallery</h1>
+        <div class="section-header-underline"></div>
+        <div class="image-gallery">
+          <div class="gallery-item1">
+            <img src="/images/ICD10.webp" alt="">
+            <div class="gallery-item-caption">
+              <a class="vimeo-popup" href="/images/ICD10.webp"></a>
+            </div>
+          </div>
+          <div class="gallery-item1">
+            <img src="/images/hipaa_compliant.webp" alt="">
+            <div class="gallery-item-caption">
+              <a class="vimeo-popup" href="/images/hipaa_compliant.webp"></a>
+            </div>
+          </div>
+          <div class="gallery-item1">
+            <img src="/images/pci2.webp" alt="">
+            <div class="gallery-item-caption">
+              <a class="vimeo-popup" href="/images/pci2.webp"></a>
+            </div>
+          </div>
+          <div class="gallery-item1">
+            <img src="/images/nist.webp" alt="">
+            <div class="gallery-item-caption">
+              <a class="vimeo-popup" href="/images/nist.webp"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
+<div class="container-fluid img-gal text-center mt-5">
+    <h3>GALLERY</h3>
+
+    <div class="row tabone text-center">
+      <button class="col-md-6 tablinksone" onclick="openCityone(event, 'tabone')">Image Gallery</button>
+      <button class="col-md-6 tablinksone" onclick="openCityone(event, 'tabtwo')">Video Gallery</button>
+    </div>
+
+    <div id="tabone" class="container-fluid tabcontentone">
+      <div class="row">
+            <h1>IMAGE GALLERY</h1>
+           <div class="col-md-3" th:each="example: ${example}">
+              <img alt="abc" class="img-fluid"
+					 th:src="@{${example.photos}}">
+             <button class="btn btn-danger" type="button"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></button>
+          </div>
+      </div>
+    </div>
+
+    <div id="tabtwo" class="container-fluid tabcontentone">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <h1>VIDEO GALLERY</h1>
+           <div class="col-md-3">
+             <div class="thumbnail">
+              <video width="320" height="240" controls>
+                <source src="https://www.w3schools.com/tags/movie.mp4" type="video/mp4">
+              </video>
+             </div>
+             <button class="btn btn-danger" type="button"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></button>
+           </div>
+           <div class="col-md-3">
+             <div class="thumbnail">
+              <video width="320" height="240" controls>
+                <source src="https://www.w3schools.com/tags/movie.mp4" type="video/mp4">
+              </video>
+             </div>
+             <button class="btn btn-danger" type="button"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></button>
+           </div>
+           <div class="col-md-3">
+             <div class="thumbnail">
+              <video width="320" height="240" controls>
+                <source src="https://www.w3schools.com/tags/movie.mp4" type="video/mp4">
+              </video>
+             </div>
+             <button class="btn btn-danger" type="button"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></button>
+           </div>
+           <div class="col-md-3">
+             <div class="thumbnail">
+              <video width="320" height="240" controls>
+                <source src="https://www.w3schools.com/tags/movie.mp4" type="video/mp4">
+              </video>
+             </div>
+             <button class="btn btn-danger" type="button"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></button>
+           </div>
+           <div class="col-md-3">
+             <div class="thumbnail">
+              <video width="320" height="240" controls>
+                <source src="https://www.w3schools.com/tags/movie.mp4" type="video/mp4">
+              </video>
+             </div>
+             <button class="btn btn-danger" type="button"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></button>
+           </div>
+           <div class="col-md-3">
+             <div class="thumbnail">
+              <video width="320" height="240" controls>
+                <source src="https://www.w3schools.com/tags/movie.mp4" type="video/mp4">
+              </video>
+             </div>
+             <button class="btn btn-danger" type="button"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></button>
+           </div>
+           <div class="col-md-3">
+             <div class="thumbnail">
+              <video width="320" height="240" controls>
+                <source src="https://www.w3schools.com/tags/movie.mp4" type="video/mp4">
+              </video>
+             </div>
+             <button class="btn btn-danger" type="button"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></button>
+           </div>
+           <div class="col-md-3">
+             <div class="thumbnail">
+              <video width="320" height="240" controls>
+                <source src="https://www.w3schools.com/tags/movie.mp4" type="video/mp4">
+              </video>
+             </div>
+             <button class="btn btn-danger" type="button"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></button>
+           </div>
+           <div class="col-md-3">
+             <div class="thumbnail">
+              <video width="320" height="240" controls>
+                <source src="https://www.w3schools.com/tags/movie.mp4" type="video/mp4">
+              </video>
+             </div>
+             <button class="btn btn-danger" type="button"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></button>
+           </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+    <!-- Optional JavaScript; choose one of the two! -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/js/bootstrap.bundle.min.js"></script>
+   <!--   <script th:src="@{/js/app.js}"></script>  -->
+    <script>
+    
+ // camera view tabs on top
+    function openCity(cityName,elmnt,color) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].style.backgroundColor = "";
+        }
+        document.getElementById(cityName).style.display = "block";
+        elmnt.style.backgroundColor = color;
+      
+      }
+      // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+    // camera view tab end
+
+    // image gallery tabs start
+    function openCityone(evt, cityName) {
+        var i, tabcontentone, tablinks1;
+        tabcontentone = document.getElementsByClassName("tabcontentone");
+        for (i = 0; i < tabcontentone.length; i++) {
+          tabcontentone[i].style.display = "none";
+        }
+        tablinksone = document.getElementsByClassName("tablinksone");
+        for (i = 0; i < tablinksone.length; i++) {
+          tablinksone[i].className = tablinksone[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+      }
+      document.getElementById("defaultOpen").click();
+    // image gallery tabs end
+
+    // camera setting for capture images
+
+    var video = document.querySelector("#video");    
+    // Basic settings for the video to get from Webcam  
+    const constraints = {  
+        audio: false,  
+        video: {  
+            width: 475, height: 475  
+        }  
+    };
+    // This condition will ask permission to user for Webcam access  
+    if (navigator.mediaDevices.getUserMedia) {  
+        navigator.mediaDevices.getUserMedia(constraints)  
+            .then(function (stream) {  
+                video.srcObject = stream;  
+            })  
+            .catch(function (err0r) {  
+                console.log("Something went wrong!");  
+            });  
+    } 
+    // capture image from video in image section  
+    $("#btnCapture").click(function () {  
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+        // Capture the image into canvas from Webcam streaming Video element  
+        var valimg = context.drawImage(video, 0, 0);
+      
+        console.log(context.drawImage(video, 0, 0));
+         //Below new canvas to generate flip/mirron image from existing canvas  and call to the controller to store data in database
+        //  var destinationCanvas = document.createElement("canvas");  
+        //  var destCtx = destinationCanvas.getContext('2d');  
+
+        //  destinationCanvas.height = 500;  
+        //  destinationCanvas.width = 500;  
+
+        //  destCtx.translate(video.videoWidth, 0);  
+        //  destCtx.scale(-1, 1);  
+        //  destCtx.drawImage(document.getElementById("canvas"), 0, 0);  
+
+         // Get base64 data to send to server for upload  
+        //  var imagebase64data = destinationCanvas.toDataURL("image/png");  
+        //  imagebase64data = imagebase64data.replace('data:image/png;base64,', '');  
+        //  debugger
+        //  $.ajax({  
+        //      type: 'POST',  
+        //      url: '/Home/UploadWebCamImage',  
+        //      data: '{ "imageData" : "' + imagebase64data + '" }',  
+        //      contentType: 'application/json; charset=utf-8',  
+        //      dataType: 'text',  
+        //      success: function (out) {  
+        //          alert('Image uploaded successfully..');  
+        //      }  
+        //  });  
+    }); 
+
+
+
+    // button save captured image image
+    $("#btnclic").click(function () {  
+     
+
+         // Below new canvas to generate flip/mirron image from existing canvas  
+         var destinationCanvas = document.createElement("canvas");  
+         var destCtx = destinationCanvas.getContext('2d');  
+
+         
+         destinationCanvas.height = 500;  
+         destinationCanvas.width = 500;  
+
+         destCtx.translate(video.videoWidth, 0);  
+         destCtx.scale(-1, 1);  
+         destCtx.drawImage(document.getElementById("canvas"), 0, 0);  
+
+         // Get base64 data to send to server for upload  
+         var imagebase64data = destinationCanvas.toDataURL("image/png");  
+         imagebase64data = imagebase64data.replace('data:image/png;base64,', '');  
+         //imagebase64data = imagebase64data.replace('data:image/png,', '');
+     
+         
+      var search = {}; 
+      search["imagebase64data"] = imagebase64data;
+
+
+         debugger
+         $.ajax({  
+        	 type: 'POST',  
+             url: 'http://localhost:8082/image/save',
+             data: JSON.stringify({"photos":imagebase64data}),
+             //data: '{ "imageValue" : "' + imagebase64data + '" }',  
+             contentType: 'application/json; charset=utf-8',  
+             dataType: 'text',  
+             success: function (out) {  
+                 alert('Image uploaded successfully..');  
+             }  
+         });  
+    }); 
+
+
+
+    // camera setting for capture images
+
+    //video element  start
+    let mediaRecorder;
+    let recordedBlobs;
+    const errorMsgElement = document.querySelector('span#errorMsg');
+
+    const recordedVideo = document.querySelector('video#recorded');
+    const recordButton = document.querySelector('button#record');
+    const playButton = document.querySelector('button#play');
+    const downloadButton = document.querySelector('a#download');
+    recordButton.addEventListener('click', () => {
+    if (recordButton.textContent === 'Record') {
+        startRecording();
+    } else {
+        stopRecording();
+        recordButton.textContent = 'Record';
+        playButton.disabled = false;
+        downloadButton.disabled = false;
+    }
+    });
+
+    downloadButton.addEventListener('click', () => {
+    const blob = new Blob(recordedBlobs, {type: 'video/mp4'});
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.style.display = 'none';
+    a.href = url;
+    a.download = 'w3-coder-recorder-test.mp4';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => {
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+    }, 100);
+    });
+
+    function handleDataAvailable(event) {
+
+    console.log('handleDataAvailable', event);
+    if (event.data && event.data.size > 0) {
+        recordedBlobs.push(event.data);
+    }
+    }
+
+    function startRecording() {
+    recordedBlobs = [];
+    let options = {mimeType: 'video/webm;codecs=vp9,opus'};
+    try {
+        mediaRecorder = new MediaRecorder(window.stream, options);
+
+    } catch (e) {
+        console.error('Exception while creating MediaRecorder:', e);
+        errorMsgElement.innerHTML = `Exception while creating MediaRecorder: ${JSON.stringify(e)}`;
+        return;
+    }
+    console.log('Created MediaRecorder', mediaRecorder, 'with options', options);
+    recordButton.textContent = 'Stop';
+    playButton.disabled = true;
+    downloadButton.disabled = true;
+    mediaRecorder.onstop = (event) => {
+    const superBuffer = new Blob(recordedBlobs, {type: 'video/webm'});
+    recordedVideo.src = null;
+    recordedVideo.srcObject = null;
+    recordedVideo.src = window.URL.createObjectURL(superBuffer);
+    recordedVideo.controls = true;
+    recordedVideo.play();
+    console.log('Recorder stopped: ', event);
+    console.log('Recorded Blobs: ', recordedBlobs);
+    };
+    mediaRecorder.ondataavailable = handleDataAvailable;
+    mediaRecorder.start();
+    recordedVideo.src = null;
+    recordedVideo.srcObject = null;
+    recordedVideo.controls = false;
+    recordedVideo.pause(true);
+    console.log('MediaRecorder started', mediaRecorder);
+    }
+
+    function stopRecording() {
+    mediaRecorder.stop();
+    }
+
+    function handleSuccess(stream) {
+    recordButton.disabled = false;
+    console.log('getUserMedia() got stream:', stream);
+    window.stream = stream;
+
+    const gumVideo = document.querySelector('video#gum');
+    gumVideo.srcObject = stream;
+    }
+
+    async function init(constraints) {
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia(constraints);
+        handleSuccess(stream);
+    } catch (e) {
+        console.error('navigator.getUserMedia error:', e);
+        errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
+    }
+    }
+
+    document.querySelector('button#start').addEventListener('click', async () => {
+    const hasEchoCancellation = document.querySelector('#echoCancellation').checked;
+    const constraints = {
+        audio: {
+        echoCancellation: {exact: hasEchoCancellation}
+        },
+        video: {
+        width: 475, height: 475,  
+        }
+    };
+    console.log('Using media constraints:', constraints);
+    await init(constraints);
+    });
+
+    // get all camera 
+    navigator.mediaDevices.enumerateDevices().then((devices) => {
+        let videoSourcesSelect = document.getElementById("video-source");
+        // Iterate over all the list of devices (InputDeviceInfo and MediaDeviceInfo)
+        devices.forEach((device) => {
+            let option = new Option();
+            option.value = device.deviceId;
+            // According to the type of media device
+            switch(device.kind){
+                // Append device to list of Cameras
+                case "videoinput":
+                    option.text = device.label || `Camera ${videoSourcesSelect.length + 1}`;
+                    videoSourcesSelect.appendChild(option);
+                    break;
+            }
+            console.log(device);
+        });
+    }).catch(function (e) {
+        console.log(e.name + ": " + e.message);
+    });
+
+
+
+
+
+
+                            // div for image
+
+      // const imgSrc=canvas.toDataURL("img/png");
+        // const img = new Image();
+        // img.src = imgSrc
+        // document.querySelector('.image-holder').appendChild(img);
+        // localStorage.setItem('imgSrc', imgSrc)
+    
+      </script>
+  </body>
+</html>

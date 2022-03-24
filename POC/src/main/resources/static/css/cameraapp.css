@@ -1,0 +1,296 @@
+body {font-family: "Lato", sans-serif;}
+
+.tablink {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+width: 50%;
+}
+
+.tablink:hover {
+  background-color: #777;
+}
+
+/* Style the tab content */
+
+
+#London {background-color: transparent;}
+#Paris {background-color: transparent;}
+
+ /* Flipping the video as it was not mirror view */  
+   /* Flipping the video as it was not mirror view */  
+    video {  
+        -webkit-transform: scaleX(-1);  
+        transform: scaleX(-1);  
+        margin-top: 5px;  
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }  
+  
+    /* Flipping the canvas image as it was not mirror view */  
+    #canvas {
+        -moz-transform: scaleX(-1);  
+        -o-transform: scaleX(-1);  
+        -webkit-transform: scaleX(-1);  
+        transform: scaleX(-1);  
+        filter: FlipH;  
+        -ms-filter: "FlipH"; 
+    }  
+#btnCapture,#btnCapture1{
+    /* position: absolute;
+    top: 30rem;
+    left: 33rem; */
+    border: 2px solid white;
+    background-color: red;
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    
+}
+#btnCapture{
+  /* position: absolute;
+  top: 30rem;
+  left: 33rem; */
+  border: 2px solid white;
+  background-color: black;
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+  
+}
+#record{
+  border: 2px solid white;
+  background-color: red;
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+  font-weight: 700;
+}
+button:focus{
+    outline: none !important;
+}
+  @media only screen and (max-width: 700px) {
+    #canvas {
+        border: 5px solid red !important;
+        width: 100%;
+      }
+    }
+
+/*video gallery */
+.section-header {
+  text-align: center;
+  margin: 60px auto 20px auto;
+
+  font-size: 48px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #222;
+}
+
+.section-header-underline {
+  border: 1px solid #222;
+  width: 3rem;
+  margin: 0 auto;
+  margin-bottom: 30px;
+}
+
+.video-gallery {
+  position: relative;
+  margin: 0 auto;
+  max-width: 1000px;
+  text-align: center;
+}
+
+.video-gallery .gallery-item {
+  position: relative;
+  float: left;
+  overflow: hidden;
+  margin: 10px 1%;
+  min-width: 320px;
+  max-width: 580px;
+  max-height: 360px;
+  width: 48%;
+  background: #000;
+  cursor: pointer;
+}
+
+.video-gallery .gallery-item img {
+  position: relative;
+  display: block;
+  opacity: .45;
+  width: 105%;
+  height: 300px;
+  transition: opacity 0.35s, transform 0.35s;
+  transform: translate3d(-23px, 0, 0);
+  backface-visibility: hidden;
+}
+
+.video-gallery .gallery-item .gallery-item-caption {
+  padding: 2em;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1.25em;
+}
+
+.video-gallery .gallery-item .gallery-item-caption,
+.video-gallery .gallery-item .gallery-item-caption > a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.video-gallery .gallery-item:hover img {
+  opacity: .3;
+  transform: translate3d(0, 0, 0);
+
+}
+@media screen and (max-width: 50em) {
+  .video-gallery .gallery-item {
+    display: inline-block;
+    float: none;
+    margin: 10px auto;
+    width: 100%;
+  }
+}
+
+/* image gallery start */
+
+.image-gallery {
+  position: relative;
+  margin: 0 auto;
+  max-width: 1000px;
+  text-align: center;
+}
+
+.image-gallery .gallery-item1 {
+  position: relative;
+  float: left;
+  overflow: hidden;
+  margin: 10px 1%;
+  min-width: 320px;
+  max-width: 580px;
+  max-height: 360px;
+  width: 48%;
+  background: #000;
+  cursor: pointer;
+}
+
+.image-gallery .gallery-item1 img {
+  position: relative;
+  display: block;
+  opacity: .45;
+  width: 105%;
+  height: 300px;
+  transition: opacity 0.35s, transform 0.35s;
+  transform: translate3d(-23px, 0, 0);
+  backface-visibility: hidden;
+}
+
+.image-gallery .gallery-item1 .gallery-item-caption {
+  padding: 2em;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1.25em;
+}
+
+.image-gallery .gallery-item1 .gallery-item-caption,
+.image-gallery .gallery-item1 .gallery-item-caption > a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.image-gallery .gallery-item1:hover img {
+  opacity: .3;
+  transform: translate3d(0, 0, 0);
+
+}
+@media screen and (max-width: 50em) {
+  .image-gallery .gallery-item1 {
+    display: inline-block;
+    float: none;
+    margin: 15px auto;
+    width: 100%;
+  }
+}
+
+/* image and video gallery */
+
+  /* Style the tab */
+  .img-gal .tabone {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.img-gal .tabone button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.img-gal .tabone button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.img-gal .tabone button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.img-gal .tabcontentone {
+  display: none;
+  padding: 6px 12px;
+  -webkit-animation: fadeEffect 1s;
+  animation: fadeEffect 1s;
+}
+.img-gal h1{
+  text-align: center;
+  font-weight: 700;
+  margiN: 3rem 0 3rem 0;
+}
+/* Fade in tabs */
+@-webkit-keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+img{
+      width: 100%;
+      height: 100%;
+      margin-top: 50px;
+      transform: scaleX(1);
+    }
+video{
+      width: 100%;
+      height: 100%;
+      margin-top: 50px;
+      transform: scaleX(1);
+}
+.tabcontentone button{
+      width: 100%;
+      content: \F5DE;
+    }
+.tabcontentone button{
+      width: 100%;
+    }
